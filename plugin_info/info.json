@@ -1,29 +1,20 @@
 {
-	"id" : "template",
-	"name" : "Template",
-	"specialAttributes" : {
-		"object" : {
-			"toto" : {"name" : {"fr_FR" : "Plop je suis un attribut spécial"},"type" : "input"},
-			"toto2" : {"name" : {"fr_FR" : "Plop je suis un attribut spécial number"},"type" : "number"}
-		},
-		"user" : {
-			"toto" : {"name" : {"fr_FR" : "Plop je suis un attribut spécial"},"type" : "select","values" : [{"value" : "1", "name" : "valeur 1"},{"value" : "plop", "name" : "valeur plop"}]}
-		}
-	},
+	"id" : "json",
+	"name" : "Json",
 	"description" : {
-		"fr_FR": "Template servant de base à la création de plugins pour Jeedom"
+		"fr_FR": "Plugin permettant de parser n'importe quel flux Json à l'aide de JsonPath"
 	},
 	"licence" : "AGPL",
-	"author" : "Jeedom SAS",
-	"require" : "4.2.0",
+	"author" : "Scanab",
+	"require" : "3.3.39",
 	"category" : "programming",
 	"hasDependency" : false,
 	"hasOwnDeamon" : false,
 	"maxDependancyInstallTime" : 0,
-	"changelog" : "https://jeedom.github.io/plugin-template/#language#/changelog",
-	"documentation" : "https://jeedom.github.io/plugin-template/#language#/",
-	"changelog_beta" : "https://jeedom.github.io/plugin-template/#language#/beta/changelog",
-	"documentation_beta" : "https://jeedom.github.io/plugin-template/#language#/beta/",
+	"changelog" : "https://scanab.github.io/jeedom-plugin-vmcAuto/#language#/changelog",
+	"documentation" : "https://scanab.github.io/jeedom-plugin-vmcAuto/#language#/",
+	"changelog_beta" : "https://scanab.github.io/jeedom-plugin-vmcAuto/#language#/beta/changelog",
+	"documentation_beta" : "https://scanab.github.io/jeedom-plugin-vmcAuto/#language#/beta/",
 	"link" : {
 		"forum":"Lien vers le forum",
 		"video" : "Lien vers une video"
