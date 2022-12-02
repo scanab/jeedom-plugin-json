@@ -180,7 +180,7 @@ class jsonCmd extends cmd {
       $path = '$.result.XXBTZEUR.c[0]';
       $data = json_decode(file_get_contents('https://api.kraken.com/0/public/Ticker?pair=XBTEUR'));
       $res = (new \Flow\JSONPath\JSONPath($data))->find($path)->getData();
-      if (is_object($res)) {
+      if (is_object($res) || is_array($res)) {
           $res = json_encode($res);
       }
       
