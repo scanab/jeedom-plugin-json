@@ -177,7 +177,8 @@ class jsonCmd extends cmd {
       $res = json_encode((new \Flow\JSONPath\JSONPath($data))->find('$.people.*.name')->getData());
       */
       
-      $path = '$.result.XXBTZEUR.c[0]';
+//      $path = '$.result.XXBTZEUR.c[0]';
+      $path = '$.result.XXBTZEUR.o';
       $data = json_decode(file_get_contents('https://api.kraken.com/0/public/Ticker?pair=XBTEUR'));
       $res = (new \Flow\JSONPath\JSONPath($data))->find($path)->getData();
       if (is_object($res) || is_array($res)) {
