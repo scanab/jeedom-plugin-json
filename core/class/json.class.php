@@ -39,9 +39,26 @@ class json extends eqLogic {
   /*     * ***********************Methode static*************************** */
 
   /*
-  * Fonction exécutée automatiquement toutes les minutes par Jeedom
-  public static function cron() {}
-  */
+  * Fonction exécutée automatiquement toutes les minutes par Jeedom */
+  public static function cron() {
+    foreach (eqLogic::byType('json', true) as $eqLogic) {
+      $autorefresh = $eqLogic->getConfiguration('autorefresh');
+      if ($eqLogic->getIsEnable() == 1 && $autorefresh != '') {
+        try {
+          $c = new Cron\CronExpression(checkAndFixCron($autorefresh), new Cron\FieldFactory);
+          if ($c->isDue()) {
+            foreach (($eqLogic->getCmd()) as $cmd) {
+              if ($cmd->getType() == 'info') {
+                $cmd->execute();
+              }
+            }    
+          }
+        } catch (Exception $exc) {
+          log::add('json', 'error', __('Expression cron non valide pour', __FILE__) . ' ' . $eqLogic->getHumanName() . ' : ' . $autorefresh);
+        }
+      }
+    }
+  }
 
   /*
   * Fonction exécutée automatiquement toutes les 5 minutes par Jeedom
