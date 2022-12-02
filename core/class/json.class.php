@@ -196,7 +196,7 @@ class jsonCmd extends cmd {
       
       $url = $this->getEqLogic()->getConfiguration('jsonUrl');
       log::add('json', 'debug', "Appel de $url");
-      $data = json_decode(file_get_contents('https://api.kraken.com/0/public/Ticker?pair=XBTEUR'));
+      $data = json_decode(file_get_contents($url));
 
 //      $path = '$.result.XXBTZEUR.c[0]';
       $path = $this->getLogicalId(); //'$.result.XXBTZEUR.o';
