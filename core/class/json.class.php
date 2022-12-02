@@ -195,7 +195,7 @@ class jsonCmd extends cmd {
       */
       
 //      $path = '$.result.XXBTZEUR.c[0]';
-      $path = '$.result.XXBTZEUR.o';
+      $path = $this->getLogicalId(); //'$.result.XXBTZEUR.o';
       $data = json_decode(file_get_contents('https://api.kraken.com/0/public/Ticker?pair=XBTEUR'));
       $res = (new \Flow\JSONPath\JSONPath($data))->find($path)->getData();
       

@@ -52,7 +52,7 @@ function addCmdToTable(_cmd) {
   tr += '</td>'
   tr += '<td>'
   tr += '<div class="input-group">'
-  tr += '<input class="cmdAttr form-control input-sm roundedLeft" data-l1key="configuration" data-l2key="jsonPath" placeholder="{{json path}}">'
+  tr += '<input class="cmdAttr form-control input-sm roundedLeft" data-l1key="logicalId" placeholder="{{json path}}">'
   tr += '</div>'
   tr += '</td>'
   tr += '<td>'
