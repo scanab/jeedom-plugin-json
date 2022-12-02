@@ -166,6 +166,7 @@ class jsonCmd extends cmd {
   // Exécution d'une commande
   public function execute($_options = array()) {
       log::add('json', 'debug', "Execute " . $this->getLogicalId() . ' on ' . $this->getEqLogic()->getHumanName());
+      /*
       $data = ['people' => [
         ['name' => 'Sascha'],
         ['name' => 'Bianca'],
@@ -174,6 +175,15 @@ class jsonCmd extends cmd {
       ]];
 
       $res = json_encode((new \Flow\JSONPath\JSONPath($data))->find('$.people.*.name')->getData());
+      */
+      
+      $path = '$.result.XXBTZEUR.c[0]';
+      $data = json_decode(file_get_contents('https://api.kraken.com/0/public/Ticker?pair=XBTEUR'));
+      $res = (new \Flow\JSONPath\JSONPath($data))->find($path)->getData();
+      if (is_object($res)) {
+          $res = json_encode($res);
+      }
+      
       log::add('json', 'debug', "Res : " . $res);
 
   }
