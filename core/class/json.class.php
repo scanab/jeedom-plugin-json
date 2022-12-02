@@ -165,6 +165,17 @@ class jsonCmd extends cmd {
 
   // Exécution d'une commande
   public function execute($_options = array()) {
+      log::add('json', 'debug', "Execute " . $this->getLogicalId() . ' on ' . $this->getEqLogic()->getHumanName());
+      $data = ['people' => [
+        ['name' => 'Sascha'],
+        ['name' => 'Bianca'],
+        ['name' => 'Alexander'],
+        ['name' => 'Maximilian'],
+      ]];
+
+      $res = json_encode((new \Flow\JSONPath\JSONPath($data))->find('$.people.*.name')->getData());
+      log::add('json', 'debug', "Res : " . $res);
+
   }
 
   /*     * **********************Getteur Setteur*************************** */
