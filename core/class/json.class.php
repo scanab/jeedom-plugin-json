@@ -47,7 +47,7 @@ class json extends eqLogic {
         try {
           $c = new Cron\CronExpression(checkAndFixCron($autorefresh), new Cron\FieldFactory);
           if ($c->isDue()) {
-            $this->calculate();
+            $eqLogic->calculate();
             /*foreach (($eqLogic->getCmd()) as $cmd) {
               if ($cmd->getType() == 'info') {
                 $cmd->execute();
@@ -61,7 +61,7 @@ class json extends eqLogic {
     }
   }
     
-  public function calculate($_options = array()) {
+  public static function calculate($_options = array()) {
       log::add('json', 'debug', "calculate " . $this->getHumanName());
       
       $url = $this->getConfiguration('jsonUrl');
