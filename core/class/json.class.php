@@ -47,17 +47,46 @@ class json extends eqLogic {
         try {
           $c = new Cron\CronExpression(checkAndFixCron($autorefresh), new Cron\FieldFactory);
           if ($c->isDue()) {
-            foreach (($eqLogic->getCmd()) as $cmd) {
+            $this->calculate();
+            /*foreach (($eqLogic->getCmd()) as $cmd) {
               if ($cmd->getType() == 'info') {
                 $cmd->execute();
               }
-            }    
+            }*/   
           }
         } catch (Exception $exc) {
           log::add('json', 'error', __('Expression cron non valide pour', __FILE__) . ' ' . $eqLogic->getHumanName() . ' : ' . $autorefresh);
         }
       }
     }
+  }
+    
+  public function calculate($_options = array()) {
+      log::add('json', 'debug', "calculate " . $this->getHumanName());
+      
+      $url = $this->getConfiguration('jsonUrl');
+      log::add('json', 'debug', "Appel de $url");
+      $data = json_decode(file_get_contents($url));
+      
+      foreach (($eqLogic->getCmd()) as $cmd) {
+        if ($cmd->getType() == 'info') {
+          $path = $cmd->getLogicalId();
+          log::add('json', 'debug', "JsonPath : $path");
+          $res = (new \Flow\JSONPath\JSONPath($data))->find($path)->getData();
+          if (is_array($res) && count($res) == 1 && !(is_object($res[0]) || is_array($res[0]))) {
+            $res = $res[0];
+          }
+          if (is_object($res) || is_array($res)) {
+            $res = json_encode($res);
+          }
+          try {
+            $cmd->event($res);
+          } catch (Exception $exc) {
+            log::add('json', 'error', __('Problème event. Résultat trop long ?', __FILE__) . ' ' . $eqLogic->getHumanName() . ' : ' . $autorefresh);
+          }
+          log::add('json', 'debug', "Res : " . $res);
+        }
+      }
   }
 
   /*
@@ -183,38 +212,6 @@ class jsonCmd extends cmd {
   // Exécution d'une commande
   public function execute($_options = array()) {
       log::add('json', 'debug', "Execute " . $this->getLogicalId() . ' on ' . $this->getEqLogic()->getHumanName());
-      /*
-      $data = ['people' => [
-        ['name' => 'Sascha'],
-        ['name' => 'Bianca'],
-        ['name' => 'Alexander'],
-        ['name' => 'Maximilian'],
-      ]];
-
-      $res = json_encode((new \Flow\JSONPath\JSONPath($data))->find('$.people.*.name')->getData());
-      */
-      
-      $url = $this->getEqLogic()->getConfiguration('jsonUrl');
-      log::add('json', 'debug', "Appel de $url");
-      $data = json_decode(file_get_contents($url));
-
-//      $path = '$.result.XXBTZEUR.c[0]';
-      $path = $this->getLogicalId(); //'$.result.XXBTZEUR.o';
-      $res = (new \Flow\JSONPath\JSONPath($data))->find($path)->getData();
-      
-      if (is_array($res) && count($res) == 1 && !(is_object($res[0]) || is_array($res[0]))) {
-          $res = $res[0];
-      }
-      if (is_object($res) || is_array($res)) {
-          $res = json_encode($res);
-      }
-      try {
-        $this->event($res);
-      } catch (Exception $exc) {
-        log::add('json', 'error', __('Problème event. Résultat trop long ?', __FILE__) . ' ' . $eqLogic->getHumanName() . ' : ' . $autorefresh);
-      }
-      log::add('json', 'debug', "Res : " . $res);
-
   }
 
   /*     * **********************Getteur Setteur*************************** */
