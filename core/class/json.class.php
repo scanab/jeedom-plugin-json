@@ -66,7 +66,16 @@ class json extends eqLogic {
       
       $url = $this->getConfiguration('jsonUrl');
       log::add('json', 'debug', "Appel de $url");
-      $data = json_decode(file_get_contents($url));
+      
+      $opts = array(
+        'http'=>array(
+          'method'=>"GET",
+          'header'=>"api_key: toto\r\n" .
+                    "api_secret: tata\r\n"
+        )
+      );
+      $context = stream_context_create($opts);
+      $data = json_decode(file_get_contents($url, false, $context));
       
       foreach (($this->getCmd()) as $cmd) {
         if ($cmd->getType() == 'info') {
