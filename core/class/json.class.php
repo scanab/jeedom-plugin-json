@@ -205,7 +205,7 @@ class jsonCmd extends cmd {
       if (is_object($res) || is_array($res)) {
           $res = json_encode($res);
       }
-      
+      $this->event($res);
       log::add('json', 'debug', "Res : " . $res);
 
   }
