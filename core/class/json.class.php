@@ -68,7 +68,7 @@ class json extends eqLogic {
       log::add('json', 'debug', "Appel de $url");
       $data = json_decode(file_get_contents($url));
       
-      foreach (($eqLogic->getCmd()) as $cmd) {
+      foreach (($this->getCmd()) as $cmd) {
         if ($cmd->getType() == 'info') {
           $path = $cmd->getLogicalId();
           log::add('json', 'debug', "JsonPath : $path");
@@ -82,7 +82,7 @@ class json extends eqLogic {
           try {
             $cmd->event($res);
           } catch (Exception $exc) {
-            log::add('json', 'error', __('Problème event. Résultat trop long ?', __FILE__) . ' ' . $eqLogic->getHumanName() . ' : ' . $autorefresh);
+            log::add('json', 'error', __('Problème event. Résultat trop long ?', __FILE__) . ' ' . $this->getHumanName() . ' : ' . $autorefresh);
           }
           log::add('json', 'debug', "Res : " . $res);
         }
