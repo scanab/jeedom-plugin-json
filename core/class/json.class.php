@@ -61,7 +61,7 @@ class json extends eqLogic {
     }
   }
     
-  public static function calculate($_options = array()) {
+  public function calculate($_options = array()) {
       log::add('json', 'debug', "calculate " . $this->getHumanName());
       
       $url = $this->getConfiguration('jsonUrl');
