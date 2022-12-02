@@ -194,9 +194,12 @@ class jsonCmd extends cmd {
       $res = json_encode((new \Flow\JSONPath\JSONPath($data))->find('$.people.*.name')->getData());
       */
       
+      $url = $this->getEqLogic()->getConfiguration('jsonUrl');
+      log::add('json', 'debug', "Appel de $url");
+      $data = json_decode(file_get_contents('https://api.kraken.com/0/public/Ticker?pair=XBTEUR'));
+
 //      $path = '$.result.XXBTZEUR.c[0]';
       $path = $this->getLogicalId(); //'$.result.XXBTZEUR.o';
-      $data = json_decode(file_get_contents('https://api.kraken.com/0/public/Ticker?pair=XBTEUR'));
       $res = (new \Flow\JSONPath\JSONPath($data))->find($path)->getData();
       
       if (is_array($res) && count($res) == 1 && !(is_object($res[0]) || is_array($res[0]))) {
@@ -205,7 +208,11 @@ class jsonCmd extends cmd {
       if (is_object($res) || is_array($res)) {
           $res = json_encode($res);
       }
-      $this->event($res);
+      try {
+        $this->event($res);
+      } catch (Exception $exc) {
+        log::add('json', 'error', __('Problème event. Résultat trop long ?', __FILE__) . ' ' . $eqLogic->getHumanName() . ' : ' . $autorefresh);
+      }
       log::add('json', 'debug', "Res : " . $res);
 
   }
