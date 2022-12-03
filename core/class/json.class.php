@@ -93,7 +93,8 @@ class json extends eqLogic {
           } catch (Exception $exc) {
             log::add('json', 'error', __('Problème event. Résultat trop long ?', __FILE__) . ' ' . $this->getHumanName() . ' : ' . $autorefresh);
           }
-          log::add('json', 'debug', "Res : " . $res);
+          log::add('json', 'debug', "Res : $res");
+          log::add('json', 'info', "$path : $res");
         }
       }
   }
