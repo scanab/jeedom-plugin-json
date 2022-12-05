@@ -132,7 +132,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 									<sup><i class="fas fa-question-circle tooltips" title="{{Renseignez la methode http}}"></i></sup>
 								</label>
 								<div class="col-sm-6">
-									<select id="sel_object" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="http-method">
+									<select class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="http-method">
     									<option value="GET">{{GET}}</option>
     									<option value="POST">{{POST}}</option>
     									<option value="PUT">{{PUT}}</option>
@@ -142,6 +142,19 @@ $eqLogics = eqLogic::byType($plugin->getId());
 							</div>
 							<div class="form-group">
 								<label class="col-sm-4 control-label">{{URI}}
+									<sup><i class="fas fa-question-circle tooltips" title="{{Renseignez l'uri de la WebApi}}"></i></sup>
+								</label>
+								<div class="col-sm-6">
+                                    <div class="input-group">
+									    <input type="text" class="eqLogicAttr form-control roundedLeft" data-concat="1" data-l1key="configuration" data-l2key="uri" placeholder="{{URI}}">
+									    <span class="input-group-addon roundedRight">
+											<a class="btn btn-default cursor listCmdInfo" title="Rechercher une commande"><i class="fas fa-list-alt"></i></a>
+									    </span>
+                                    </div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-4 control-label">{{URI bak}}
 									<sup><i class="fas fa-question-circle tooltips" title="{{Renseignez l'uri de la WebApi}}"></i></sup>
 								</label>
 								<div class="col-sm-6">
