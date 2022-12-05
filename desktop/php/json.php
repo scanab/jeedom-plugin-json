@@ -154,19 +154,6 @@ $eqLogics = eqLogic::byType($plugin->getId());
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-4 control-label">{{URI bak}}
-									<sup><i class="fas fa-question-circle tooltips" title="{{Renseignez l'uri de la WebApi}}"></i></sup>
-								</label>
-								<div class="col-sm-6">
-                                    <div class="input-group">
-									    <input type="text" class="eqLogicAttr form-control roundedLeft" data-concat="1" data-l1key="configuration" data-l2key="jsonUrl" placeholder="{{URI}}">
-									    <span class="input-group-addon roundedRight">
-											<a class="btn btn-default cursor listCmdInfo" title="Rechercher une commande"><i class="fas fa-list-alt"></i></a>
-									    </span>
-                                    </div>
-								</div>
-							</div>
-							<div class="form-group">
 								<label class="col-sm-4 control-label">{{Headers}}
 									<sup><i class="fas fa-question-circle tooltips" title="{{Liste des headers (un par ligne) sous la forme 'nom: valeur'}}"></i></sup>
 								</label>
