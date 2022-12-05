@@ -24,6 +24,13 @@ $('.eqLogicAttr[data-l1key=configuration][data-l2key=authentication-type]').on('
   }
 });
 
+$(".listCmdInfo").on('click', function () {
+  var el = $(this).closest('div').find('.eqLogicAttr[data-l1key=configuration]');
+  jeedom.cmd.getSelectModal({ cmd: { type: 'info' } }, function (result) {
+    el.val(result.human);
+  });
+});
+
 /* Permet la réorganisation des commandes dans l'équipement */
 $("#table_cmd").sortable({
   axis: "y",

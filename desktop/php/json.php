@@ -141,6 +141,9 @@ $eqLogics = eqLogic::byType($plugin->getId());
 								</label>
 								<div class="col-sm-6">
 									<textarea class="form-control eqLogicAttr autogrow" data-l1key="configuration" data-l2key="headers"></textarea>
+									<span class="input-group-btn">
+											<a class="btn btn-default cursor listCmdInfo" title="Rechercher une commande"><i class="fas fa-list-alt"></i></a>
+									</span>
 								</div>
 							</div>
 							<div class="form-group">
