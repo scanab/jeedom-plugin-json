@@ -132,10 +132,12 @@ $eqLogics = eqLogic::byType($plugin->getId());
 									<sup><i class="fas fa-question-circle tooltips" title="{{Renseignez l'url du json}}"></i></sup>
 								</label>
 								<div class="col-sm-6">
-									<input type="text" class="eqLogicAttr form-control roundedLeft" data-concat="1" data-l1key="configuration" data-l2key="jsonUrl" placeholder="{{URL Json}}">
-									<span class="input-group-addon roundedRight">
+                                    <div class="input-group">
+									    <input type="text" class="eqLogicAttr form-control roundedLeft" data-concat="1" data-l1key="configuration" data-l2key="jsonUrl" placeholder="{{URL Json}}">
+									    <span class="input-group-addon roundedRight">
 											<a class="btn btn-default cursor listCmdInfo" title="Rechercher une commande"><i class="fas fa-list-alt"></i></a>
-									</span>
+									    </span>
+                                    </div>
 								</div>
 							</div>
 							<div class="form-group">
@@ -143,10 +145,12 @@ $eqLogics = eqLogic::byType($plugin->getId());
 									<sup><i class="fas fa-question-circle tooltips" title="{{Liste des headers (un par ligne) sous la forme 'nom: valeur'}}"></i></sup>
 								</label>
 								<div class="col-sm-6">
-									<textarea class="form-control eqLogicAttr roundedLeft autogrow" data-concat="1" data-l1key="configuration" data-l2key="headers"></textarea>
-									<span class="input-group-addon roundedRight">
+                                    <div class="input-group">
+								        <textarea class="form-control eqLogicAttr roundedLeft autogrow" data-concat="1" data-l1key="configuration" data-l2key="headers"></textarea>
+									   <span class="input-group-addon roundedRight">
 											<a class="btn btn-default cursor listCmdInfo" title="Rechercher une commande"><i class="fas fa-list-alt"></i></a>
-									</span>
+									   </span>
+                                    </div>
 								</div>
 							</div>
 							<div class="form-group">
