@@ -71,9 +71,9 @@ class json extends eqLogic {
 
   private static function headersString2Tab($_headers = "") {
     $result = array();
-    foreach (explode("\r\n", trim($_headers)) as $header) {
+    foreach (explode("\n", trim(str_replace("\r\n", "\n", $_headers))) as $header) {
       $h = explode(":", $header, 2);
-      $result[$h[0]] = trim(h[1]);
+      $result[trim($h[0])] = trim(h[1]);
     }
     log::add('json', 'debug', "headersString2Tab($_headers) = " . json_encode($result));
     return $result;
