@@ -127,7 +127,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 							</div>
 
 							<legend><i class="fas fa-cogs"></i> {{Paramètres spécifiques}}</legend>
-							<!--div class="form-group">
+							<!div class="form-group">
 								<label class="col-sm-4 control-label" >{{Methode}}
 									<sup><i class="fas fa-question-circle tooltips" title="{{Renseignez la methode http}}"></i></sup>
 								</label>
@@ -152,7 +152,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 									    </span>
                                     </div>
 								</div>
-							</div-->
+							</div>
 							<div class="form-group">
 								<label class="col-sm-4 control-label">{{URI bak}}
 									<sup><i class="fas fa-question-circle tooltips" title="{{Renseignez l'uri de la WebApi}}"></i></sup>
