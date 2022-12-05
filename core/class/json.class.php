@@ -61,7 +61,7 @@ class json extends eqLogic {
     }
   }
     
-  private function headersTab2String($_headers = array()) {
+  private static function headersTab2String($_headers = array()) {
     $result = "";
     foreach ($_headers as $key => $value) {
       $result = "$result: $value\n\r";
@@ -69,7 +69,7 @@ class json extends eqLogic {
     return $result;
   }
 
-  private function headersString2Tab($_headers = "") {
+  private static function headersString2Tab($_headers = "") {
     $result = array();
     foreach (explode("\r\n", $_headers) as $header) {
       $h = explode(":", $header, 2);
@@ -93,7 +93,7 @@ class json extends eqLogic {
       $opts = array(
         'http'=>array(
           'method'=> "GET",
-          'header'=> headersTab2String($headers),
+          'header'=> json::headersTab2String($headers),
           'protocol_version' => 1.1
         )
       );
