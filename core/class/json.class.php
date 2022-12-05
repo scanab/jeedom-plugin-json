@@ -61,19 +61,46 @@ class json extends eqLogic {
     }
   }
     
+  private function headersTab2String($_headers = array()) {
+    $result = "";
+    foreach ($_headers as $key => $value) {
+      $result = "$result: $value\n\r";
+    }
+    return $result;
+  }
+
+  private function headersString2Tab($_headers = "") {
+    $result = array();
+    foreach (explode("\r\n", $_headers) as $header) {
+      $h = explode(":", $header, 2);
+      $result[$h[0]] = trim(h[1]);
+    }
+    return $result;
+  }
+
   public function calculate($_options = array()) {
       log::add('json', 'debug', "calculate " . $this->getHumanName());
       
       $url = $this->getConfiguration('jsonUrl');
-      log::add('json', 'debug', "Appel de $url");
-      
+
+      $headers = array();
+      if ($this->getConfiguration('authentication-type') == 'http-basic-authentication') {
+        $username = $this->getConfiguration('authentication-username');
+        $password = $this->getConfiguration('authentication-password');
+        $headers["Authorization"] = "Basic " . base64_encode("$username:$password");
+      }
+
       $opts = array(
         'http'=>array(
-          'method'=>"GET",
-          'header'=>"api_key: toto\r\n" .
-                    "api_secret: tata\r\n"
+          'method'=> "GET",
+          'header'=> headersTab2String($headers),
+          'protocol_version' => 1.1
         )
       );
+
+      log::add('json', 'debug', "Appel de $url");
+      log::add('json', 'debug', "Options : " . json_encode($opts));
+      
       $context = stream_context_create($opts);
       $data = json_decode(file_get_contents($url, false, $context));
       

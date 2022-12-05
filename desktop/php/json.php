@@ -136,11 +136,30 @@ $eqLogics = eqLogic::byType($plugin->getId());
 								</div>
 							</div>
 							<div class="form-group">
+								<label class="col-sm-4 control-label" >{{Type d'authentification}}
+									<sup><i class="fas fa-question-circle tooltips" title="{{Renseignez le type d'authentification}}"></i></sup>
+								</label>
+								<div class="col-sm-6">
+									<select id="sel_object" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="authentication-type">
+									<option value="none">{{Aucune}}</option>
+									<option value="http-basic-authentication">{{Authentification HTTP}}</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group authentication-username">
+								<label class="col-sm-4 control-label"> {{Login}}
+									<sup><i class="fas fa-question-circle tooltips" title="{{Renseignez le login}}"></i></sup>
+								</label>
+								<div class="col-sm-6">
+									<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="authentication-username">
+								</div>
+							</div>
+							<div class="form-group authentication-password">
 								<label class="col-sm-4 control-label"> {{Mot de passe}}
 									<sup><i class="fas fa-question-circle tooltips" title="{{Renseignez le mot de passe}}"></i></sup>
 								</label>
 								<div class="col-sm-6">
-									<input type="text" class="eqLogicAttr form-control inputPassword" data-l1key="configuration" data-l2key="password">
+									<input type="text" class="eqLogicAttr form-control inputPassword" data-l1key="configuration" data-l2key="authentication-password">
 								</div>
 							</div>
 							<!-- Exemple de champ de saisie du cron d'auto-actualisation avec assistant -->

@@ -14,6 +14,16 @@
 * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
 */
 
+/* masque ou montre les champs d'authentification */
+$('.eqLogicAttr[data-l1key=configuration][data-l2key=authentication-type]').on('change', function () {
+  $('.authentication-username').hide();
+  $('.authentication-password').hide();
+  if ($(this).value() === 'http-basic-authentication') {
+    $('.authentication-username').show();
+    $('.authentication-password').show();
+  }
+});
+
 /* Permet la réorganisation des commandes dans l'équipement */
 $("#table_cmd").sortable({
   axis: "y",
