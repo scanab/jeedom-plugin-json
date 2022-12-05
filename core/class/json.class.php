@@ -64,7 +64,7 @@ class json extends eqLogic {
   private static function headersTab2String($_headers = array()) {
     $result = "";
     foreach ($_headers as $key => $value) {
-      $result = "$key: $value\n\r";
+      $result = "$result\r\n$key: $value";
     }
     return $result;
   }
