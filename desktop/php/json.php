@@ -136,6 +136,14 @@ $eqLogics = eqLogic::byType($plugin->getId());
 								</div>
 							</div>
 							<div class="form-group">
+								<label class="col-sm-4 control-label">{{Headers}}
+									<sup><i class="fas fa-question-circle tooltips" title="{{Liste des headers (un par ligne) sous la forme 'nom: valeur'}}"></i></sup>
+								</label>
+								<div class="col-sm-6">
+									<textarea class="form-control eqLogicAttr autogrow" data-l1key="configuration" data-l2key="headers"></textarea>
+								</div>
+							</div>
+							<div class="form-group">
 								<label class="col-sm-4 control-label" >{{Type d'authentification}}
 									<sup><i class="fas fa-question-circle tooltips" title="{{Renseignez le type d'authentification}}"></i></sup>
 								</label>
