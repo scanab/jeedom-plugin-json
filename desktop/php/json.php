@@ -132,8 +132,8 @@ $eqLogics = eqLogic::byType($plugin->getId());
 									<sup><i class="fas fa-question-circle tooltips" title="{{Renseignez l'url du json}}"></i></sup>
 								</label>
 								<div class="col-sm-6">
-									<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="jsonUrl" placeholder="{{URL Json}}">
-									<span class="input-group-btn">
+									<input type="text" class="eqLogicAttr form-control roundedLeft" data-concat="1" data-l1key="configuration" data-l2key="jsonUrl" placeholder="{{URL Json}}">
+									<span class="input-group-addon roundedRight">
 											<a class="btn btn-default cursor listCmdInfo" title="Rechercher une commande"><i class="fas fa-list-alt"></i></a>
 									</span>
 								</div>
