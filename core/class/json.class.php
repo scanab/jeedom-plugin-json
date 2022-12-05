@@ -75,6 +75,7 @@ class json extends eqLogic {
       $h = explode(":", $header, 2);
       $result[$h[0]] = trim(h[1]);
     }
+    log::add('json', 'debug', "headersString2Tab($_headers) = " . json_encode($result));
     return $result;
   }
 
