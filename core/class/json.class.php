@@ -84,7 +84,7 @@ class json extends eqLogic {
       
       $url = $this->getConfiguration('jsonUrl');
 
-      $headers = json::headersString2Tab($this->getConfiguration('headers'));
+      $headers = json::headersString2Tab(jeedom::evaluateExpression($this->getConfiguration('headers')));
       if ($this->getConfiguration('authentication-type') == 'http-basic-authentication') {
         $username = $this->getConfiguration('authentication-username');
         $password = $this->getConfiguration('authentication-password');
