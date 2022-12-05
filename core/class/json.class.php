@@ -82,7 +82,7 @@ class json extends eqLogic {
   public function calculate($_options = array()) {
       log::add('json', 'debug', "calculate " . $this->getHumanName());
       
-      $url = jeedom::evaluateExpression($this->getConfiguration('jsonUrl'));
+      $url = jeedom::evaluateExpression($this->getConfiguration('uri'));
 
       $headers = json::headersString2Tab(jeedom::evaluateExpression($this->getConfiguration('headers')));
       if ($this->getConfiguration('authentication-type') == 'http-basic-authentication') {
@@ -93,7 +93,7 @@ class json extends eqLogic {
 
       $opts = array(
         'http'=>array(
-          'method'=> "GET",
+          'method'=> $this->getConfiguration('http-method'),
           'header'=> json::headersTab2String($headers),
           'protocol_version' => 1.1
         )
