@@ -2,7 +2,7 @@
 
 Ce plugin pour **Jeedom** (développé par [scanab](https://github.com/scanab)) permet de récupérer des données depuis une source distante au format JSON et d'extraire des informations spécifiques via des requêtes **JSONPath**.
 
-Contrairement au plugin *Script* standard, il est optimisé pour ne réaliser qu'une seule requête HTTP pour l'ensemble des commandes d'un même équipement, réduisant ainsi la charge réseau et processeur.
+Il est optimisé pour ne réaliser qu'une seule requête HTTP pour l'ensemble des commandes d'un même équipement, réduisant ainsi la charge réseau et processeur.
 
 ---
 
