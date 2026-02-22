@@ -14,6 +14,27 @@
 * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
 */
 
+/* masque ou montre les champs d'authentification */
+$('.eqLogicAttr[data-l1key=configuration][data-l2key=authentication-type]').on('change', function () {
+  $('.authentication-username').hide();
+  $('.authentication-password').hide();
+  if ($(this).value() === 'http-basic-authentication') {
+    $('.authentication-username').show();
+    $('.authentication-password').show();
+  }
+});
+
+$(".listCmdInfo").on('click', function () {
+  var el = $(this).closest('div').find('.eqLogicAttr[data-l1key=configuration]');
+  jeedom.cmd.getSelectModal({ cmd: { type: 'info' } }, function (result) {
+    if (el.attr('data-concat') == 1) {
+        el.atCaret('insert', result.human);
+      } else {
+        el.value(result.human);
+      }
+  });
+});
+
 /* Permet la réorganisation des commandes dans l'équipement */
 $("#table_cmd").sortable({
   axis: "y",
@@ -49,6 +70,11 @@ function addCmdToTable(_cmd) {
   tr += '<td>'
   tr += '<span class="type" type="' + init(_cmd.type) + '">' + jeedom.cmd.availableType() + '</span>'
   tr += '<span class="subType" subType="' + init(_cmd.subType) + '"></span>'
+  tr += '</td>'
+  tr += '<td>'
+  tr += '<div class="input-group">'
+  tr += '<input class="cmdAttr form-control input-sm roundedLeft" data-l1key="logicalId" placeholder="{{json path}}">'
+  tr += '</div>'
   tr += '</td>'
   tr += '<td>'
   tr += '<label class="checkbox-inline"><input type="checkbox" class="cmdAttr" data-l1key="isVisible" checked/>{{Afficher}}</label> '

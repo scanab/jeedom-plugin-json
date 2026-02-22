@@ -3,7 +3,7 @@ if (!isConnect('admin')) {
 	throw new Exception('{{401 - Accès non autorisé}}');
 }
 // Déclaration des variables obligatoires
-$plugin = plugin::byId('template');
+$plugin = plugin::byId('json');
 sendVarToJS('eqType', $plugin->getId());
 $eqLogics = eqLogic::byType($plugin->getId());
 ?>
@@ -25,10 +25,10 @@ $eqLogics = eqLogic::byType($plugin->getId());
 				<span>{{Configuration}}</span>
 			</div>
 		</div>
-		<legend><i class="fas fa-table"></i> {{Mes templates}}</legend>
+		<legend><i class="fas fa-table"></i> {{Mes JSONs}}</legend>
 		<?php
 		if (count($eqLogics) == 0) {
-			echo '<br><div class="text-center" style="font-size:1.2em;font-weight:bold;">{{Aucun équipement Template trouvé, cliquer sur "Ajouter" pour commencer}}</div>';
+			echo '<br><div class="text-center" style="font-size:1.2em;font-weight:bold;">{{Aucun équipement Json trouvé, cliquer sur "Ajouter" pour commencer}}</div>';
 		} else {
 			// Champ de recherche
 			echo '<div class="input-group" style="margin:5px;">';
@@ -128,19 +128,69 @@ $eqLogics = eqLogic::byType($plugin->getId());
 
 							<legend><i class="fas fa-cogs"></i> {{Paramètres spécifiques}}</legend>
 							<div class="form-group">
-								<label class="col-sm-4 control-label">{{Nom du paramètre n°1}}
-									<sup><i class="fas fa-question-circle tooltips" title="{{Renseignez le paramètre n°1 de l'équipement}}"></i></sup>
+								<label class="col-sm-4 control-label" >{{Methode}}
+									<sup><i class="fas fa-question-circle tooltips" title="{{Renseignez la methode http}}"></i></sup>
 								</label>
 								<div class="col-sm-6">
-									<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="param1" placeholder="{{Paramètre n°1}}">
+									<select class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="http-method">
+    									<option value="GET">{{GET}}</option>
+    									<option value="POST">{{POST}}</option>
+    									<option value="PUT">{{PUT}}</option>
+    									<option value="DELETE">{{DELETE}}</option>
+									</select>
 								</div>
 							</div>
 							<div class="form-group">
+								<label class="col-sm-4 control-label">{{URI}}
+									<sup><i class="fas fa-question-circle tooltips" title="{{Renseignez l'uri de la WebApi}}"></i></sup>
+								</label>
+								<div class="col-sm-6">
+                                    <div class="input-group">
+									    <input type="text" class="eqLogicAttr form-control roundedLeft" data-concat="1" data-l1key="configuration" data-l2key="uri" placeholder="{{URI}}">
+									    <span class="input-group-addon roundedRight">
+											<a class="btn btn-default cursor listCmdInfo" title="Rechercher une commande"><i class="fas fa-list-alt"></i></a>
+									    </span>
+                                    </div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-4 control-label">{{Headers}}
+									<sup><i class="fas fa-question-circle tooltips" title="{{Liste des headers (un par ligne) sous la forme 'nom: valeur'}}"></i></sup>
+								</label>
+								<div class="col-sm-6">
+                                    <div class="input-group">
+								        <textarea class="form-control eqLogicAttr roundedLeft autogrow" data-concat="1" data-l1key="configuration" data-l2key="headers"></textarea>
+									   <span class="input-group-addon roundedRight">
+											<a class="btn btn-default cursor listCmdInfo" title="Rechercher une commande"><i class="fas fa-list-alt"></i></a>
+									   </span>
+                                    </div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-4 control-label" >{{Type d'authentification}}
+									<sup><i class="fas fa-question-circle tooltips" title="{{Renseignez le type d'authentification}}"></i></sup>
+								</label>
+								<div class="col-sm-6">
+									<select id="sel_object" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="authentication-type">
+									<option value="none">{{Aucune}}</option>
+									<option value="http-basic-authentication">{{Authentification HTTP}}</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group authentication-username">
+								<label class="col-sm-4 control-label"> {{Login}}
+									<sup><i class="fas fa-question-circle tooltips" title="{{Renseignez le login}}"></i></sup>
+								</label>
+								<div class="col-sm-6">
+									<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="authentication-username">
+								</div>
+							</div>
+							<div class="form-group authentication-password">
 								<label class="col-sm-4 control-label"> {{Mot de passe}}
 									<sup><i class="fas fa-question-circle tooltips" title="{{Renseignez le mot de passe}}"></i></sup>
 								</label>
 								<div class="col-sm-6">
-									<input type="text" class="eqLogicAttr form-control inputPassword" data-l1key="configuration" data-l2key="password">
+									<input type="text" class="eqLogicAttr form-control inputPassword" data-l1key="configuration" data-l2key="authentication-password">
 								</div>
 							</div>
 							<!-- Exemple de champ de saisie du cron d'auto-actualisation avec assistant -->
@@ -188,6 +238,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 								<th class="hidden-xs" style="min-width:50px;width:70px;">ID</th>
 								<th style="min-width:200px;width:350px;">{{Nom}}</th>
 								<th>{{Type}}</th>
+								<th>{{Json Path}}</th>
 								<th style="min-width:260px;">{{Options}}</th>
 								<th>{{Etat}}</th>
 								<th style="min-width:80px;width:200px;">{{Actions}}</th>
@@ -204,6 +255,6 @@ $eqLogics = eqLogic::byType($plugin->getId());
 </div><!-- /.row row-overflow -->
 
 <!-- Inclusion du fichier javascript du plugin (dossier, nom_du_fichier, extension_du_fichier, id_du_plugin) -->
-<?php include_file('desktop', 'template', 'js', 'template');?>
+<?php include_file('desktop', 'json', 'js', 'json');?>
 <!-- Inclusion du fichier javascript du core - NE PAS MODIFIER NI SUPPRIMER -->
 <?php include_file('core', 'plugin.template', 'js');?>
