@@ -257,7 +257,7 @@ class jsonCmd extends cmd {
   // Exécution d'une commande
   public function execute($_options = array()) {
       log::add('json', 'debug', __METHOD__ . "() : " . $this->getLogicalId() . ' on ' . $this->getEqLogic()->getHumanName());
-      if ($this->getType() == 'action' && $this->getNamegetLogicalId() == 'refresh') {
+      if ($this->getType() == 'action' && $this->getLogicalId() == 'refresh') {
         $this->getEqLogic()->calculate();
       } else {
         log::add('json', 'error', "Impossible d'exécuter une commande de type info : " . $this->getLogicalId() . ' on ' . $this->getEqLogic()->getHumanName());
