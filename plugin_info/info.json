@@ -11,10 +11,10 @@
 	"hasDependency" : false,
 	"hasOwnDeamon" : false,
 	"maxDependancyInstallTime" : 0,
-	"changelog" : "https://scanab.github.io/jeedom-plugin-vmcAuto/#language#/changelog",
-	"documentation" : "https://scanab.github.io/jeedom-plugin-vmcAuto/#language#/",
-	"changelog_beta" : "https://scanab.github.io/jeedom-plugin-vmcAuto/#language#/beta/changelog",
-	"documentation_beta" : "https://scanab.github.io/jeedom-plugin-vmcAuto/#language#/beta/",
+	"changelog" : "https://scanab.github.io/jeedom-plugin-json/#language#/changelog",
+	"documentation" : "https://scanab.github.io/jeedom-plugin-json/#language#/",
+	"changelog_beta" : "https://scanab.github.io/jeedom-plugin-json/#language#/changelog_beta",
+	"documentation_beta" : "https://scanab.github.io/jeedom-plugin-json/#language#/",
 	"link" : {
 		"forum":"Lien vers le forum",
 		"video" : "Lien vers une video"

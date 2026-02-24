@@ -48,11 +48,6 @@ class json extends eqLogic {
           $c = new Cron\CronExpression(checkAndFixCron($autorefresh), new Cron\FieldFactory);
           if ($c->isDue()) {
             $eqLogic->calculate();
-            /*foreach (($eqLogic->getCmd()) as $cmd) {
-              if ($cmd->getType() == 'info') {
-                $cmd->execute();
-              }
-            }*/   
           }
         } catch (Exception $exc) {
           log::add('json', 'error', __('Expression cron non valide pour', __FILE__) . ' ' . $eqLogic->getHumanName() . ' : ' . $autorefresh);
@@ -181,7 +176,19 @@ class json extends eqLogic {
 
   // Fonction exécutée automatiquement après la sauvegarde (création ou mise à jour) de l'équipement
   public function postSave() {
-  }
+    $cmd = $this->getCmd(null, 'refresh');
+    if (!is_object($cmd)) {
+      $cmd = new vmcAutoCmd();
+      $cmd->setLogicalId('refresh');
+      $cmd->setName(__('Rafraichir', __FILE__));
+      $cmd->setIsVisible(1);
+      $cmd->setOrder(0);
+	  }
+      $cmd->setType('action');
+      $cmd->setSubType('other');
+      $cmd->setEqLogic_id($this->getId());
+      $cmd->save();
+    }
 
   // Fonction exécutée automatiquement avant la suppression de l'équipement
   public function preRemove() {
@@ -249,7 +256,12 @@ class jsonCmd extends cmd {
 
   // Exécution d'une commande
   public function execute($_options = array()) {
-      log::add('json', 'debug', "Execute " . $this->getLogicalId() . ' on ' . $this->getEqLogic()->getHumanName());
+      log::add('json', 'debug', __METHOD__ . "() : " . $this->getLogicalId() . ' on ' . $this->getEqLogic()->getHumanName());
+      if ($this->getType() == 'action' && $this->getNamegetLogicalId() == 'refresh') {
+        $this->getEqLogic()->calculate();
+      } else {
+        log::add('json', 'error', "Impossible d'exécuter une commande de type info : " . $this->getLogicalId() . ' on ' . $this->getEqLogic()->getHumanName());
+      }
   }
 
   /*     * **********************Getteur Setteur*************************** */
