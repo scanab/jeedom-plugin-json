@@ -178,7 +178,7 @@ class json extends eqLogic {
   public function postSave() {
     $cmd = $this->getCmd(null, 'refresh');
     if (!is_object($cmd)) {
-      $cmd = new vmcAutoCmd();
+      $cmd = new jsonCmd();
       $cmd->setLogicalId('refresh');
       $cmd->setName(__('Rafraichir', __FILE__));
       $cmd->setIsVisible(1);
